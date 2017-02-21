@@ -1,6 +1,8 @@
 var express = require('express');
 
 var app = express();
+
+// Get our port from heroku environment variable process.env.PORT
 const PORT = process.env.PORT || 3000;
 
 // Do something with each response
