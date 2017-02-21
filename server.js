@@ -4,12 +4,14 @@ var app = express();
 const PORT = process.env.PORT || 3000;
 
 // Do something with each response
-// weather API can only handle http and heroku is looking for https
-app.use(function(req, res, next) {
-  if(req.headers['x-forwarded-proto'] === 'http') {
-    next();
-  } else {
+// openWeather API can only handle http so we need to redirect everything to http
+// I don't really understand this ^ Why do we need to redirect _everything_ ?
+// Why don't we just redirect the openWeather stuff?
+app.use(function (req, res, next){
+  if (req.headers['x-forwarded-proto'] === 'https') {
     res.redirect('http://' + req.hostname + req.url);
+  } else {
+    next();
   }
 });
 
